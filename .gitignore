@@ -229,12 +229,12 @@ Temporary Items
 # End of https://www.toptal.com/developers/gitignore/api/linux,macos
 
 data/
-code/log
-code/submit
-code/catboost_info
-code/data
-code/.ipynb_checkpoints
-code/saved_models
+base_code/log
+base_code/submit
+base_code/catboost_info
+base_code/data
+base_code/.ipynb_checkpoints
+base_code/saved_models
 nltk_data
 .config
 .dotnet
