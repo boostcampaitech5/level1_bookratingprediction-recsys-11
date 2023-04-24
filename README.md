@@ -1,6 +1,4 @@
 
-<img src="https://user-images.githubusercontent.com/88659167/233338326-5316ef42-962f-4405-a336-e0724123fb62.png">
-
 ## 🧑 Members
 
 <table>
