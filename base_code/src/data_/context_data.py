@@ -173,6 +173,15 @@ def context_data_split(args, data):
     data['X_train'], data['X_valid'], data['y_train'], data['y_valid'] = X_train, X_valid, y_train, y_valid
     return data
 
+
+def context_data_split_vkfold(args,data,train_idx, validation_idx): 
+    X_train, y_train = data['train'].loc[train_idx].drop(['rating'], axis=1), data['train'].loc[train_idx, "rating"]
+    X_valid, y_valid = data['train'].loc[validation_idx].drop(['rating'], axis=1), data['train'].loc[validation_idx, "rating"]
+
+    data['X_train'], data['X_valid'], data['y_train'], data['y_valid'] = X_train, X_valid, y_train, y_valid
+    return data
+
+
 def context_data_loader(args, data):
     """
     Parameters

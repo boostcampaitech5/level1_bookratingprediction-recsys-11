@@ -89,7 +89,9 @@ class Setting:
         path : log file을 저장할 경로를 반환합니다.
         이 때, 경로는 log/날짜_시간_모델명/ 입니다.
         '''
-        path = self.make_dir(f'./log/{self.save_time2}_{args.model}/Fold{i}/')
+        
+        str_ = f'Fold {i}'
+        path = self.make_dir(f'./log/{self.save_time}_{args.model}_{str_}/')
         return path
         
     def get_submit_filename(self, args):
