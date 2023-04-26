@@ -44,6 +44,18 @@ def train(args, model, dataloader, logger, setting):
                 x, y = [data['user_isbn_vector'].to(args.device), data['img_vector'].to(args.device)], data['label'].to(args.device)
             elif args.model == 'DeepCoNN':
                 x, y = [data['user_isbn_vector'].to(args.device), data['user_summary_merge_vector'].to(args.device), data['item_summary_vector'].to(args.device)], data['label'].to(args.device)
+            elif args.model in ('MF', 'ALS'):
+                u = data[0].long().to(args.device)
+                i = data[1].long().to(args.device)
+                y = data[2].to(args.device)
+                y_hat = model(u, i)
+                loss = loss_fn(y.float(), y_hat)
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+                total_loss += loss.item()
+                batch +=1
+                continue
             else:
                 x, y = data[0].to(args.device), data[1].to(args.device)
             y_hat = model(x)
@@ -75,6 +87,15 @@ def valid(args, model, dataloader, loss_fn):
             x, y = [data['user_isbn_vector'].to(args.device), data['img_vector'].to(args.device)], data['label'].to(args.device)
         elif args.model == 'DeepCoNN':
             x, y = [data['user_isbn_vector'].to(args.device), data['user_summary_merge_vector'].to(args.device), data['item_summary_vector'].to(args.device)], data['label'].to(args.device)
+        elif args.model in ('MF', 'ALS'):
+                u = data[0].long().to(args.device)
+                i = data[1].long().to(args.device)
+                y = data[2].to(args.device)
+                y_hat = model(u, i)
+                loss = loss_fn(y.float(), y_hat)
+                total_loss += loss.item()
+                batch +=1
+                continue
         else:
             x, y = data[0].to(args.device), data[1].to(args.device)
         y_hat = model(x)
@@ -107,6 +128,13 @@ def test(args, model, dataloader, setting):
             x, _ = [data['user_isbn_vector'].to(args.device), data['img_vector'].to(args.device)], data['label'].to(args.device)
         elif args.model == 'DeepCoNN':
             x, _ = [data['user_isbn_vector'].to(args.device), data['user_summary_merge_vector'].to(args.device), data['item_summary_vector'].to(args.device)], data['label'].to(args.device)
+        elif args.model in ('MF', 'ALS'):
+                u = data[0].long().to(args.device)
+                i = data[1].long().to(args.device)
+                y_hat = model(u, i)
+                list_ = y_hat.tolist()
+                predicts.extend(list(map(modify_range, list_)))
+                continue
         else:
             x = data[0].to(args.device)
         y_hat = model(x)
