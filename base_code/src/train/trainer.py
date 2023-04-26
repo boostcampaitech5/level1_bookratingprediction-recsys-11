@@ -73,7 +73,7 @@ def train(args, model, dataloader, logger, setting):
             os.makedirs(args.saved_model_path, exist_ok=True)
             torch.save(model.state_dict(), f'{args.saved_model_path}/{setting.save_time}_{args.model}_model.pt')
     logger.close()
-    return model 
+    return model, valid_loss
 
 
 
