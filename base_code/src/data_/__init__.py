@@ -4,4 +4,3 @@ from .image_data import image_data_load, image_data_split, image_data_loader, im
 from .text_data import text_data_load, text_data_split, text_data_loader, text_data_split_vkfold
 from .latent_data import latent_data_load, latent_data_split, latent_data_loader
 from .cat_data import *
-from .cat2_data import *
