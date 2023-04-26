@@ -96,10 +96,6 @@ def main(args):
             else:
                 pass
 
-            # todo : 다른 모델 data.py에 수정 필요
-            
-
-            # todo : log, setting 수정(?) 필요
             ####################### Setting for Log
             setting = Setting()
 
